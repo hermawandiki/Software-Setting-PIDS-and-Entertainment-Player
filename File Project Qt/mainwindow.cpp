@@ -1,3 +1,10 @@
+/*
+ * Author   : PT. Rekaindo Global Jasa Engineer Team X Mechatronics PENS
+ * Date     : 08/05/2025
+ * Note     :
+ * Contact  : 081235738756
+*/
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -5,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    // Setup Main Screen
     ui->setupUi(this);
     this->move(0, 0);
     this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
@@ -15,8 +23,9 @@ MainWindow::MainWindow(QWidget *parent)
     screen2->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     screen2->setWindowTitle("Live Tracking KA - Extended Screen");
 
+    // Search external screen
     QList<QScreen*> screens = QGuiApplication::screens();
-    if (screens.size() > 1) {
+    if (screens.size() > 1) {  // jika screen terdeteksi lebih dari 1
         QScreen *externalScreen = screens.at(1);
         QRect geometry = externalScreen->geometry();
         screen2->setGeometry(geometry);
@@ -24,43 +33,42 @@ MainWindow::MainWindow(QWidget *parent)
         screen2->setGeometry(QGuiApplication::primaryScreen()->geometry());
     }
 
+    // Move page CSOT, VIDEO, and MAPS to other stackedWidget for external screen
     stackedWidget2 = new QStackedWidget(screen2);
-    stackedWidget2->addWidget(ui->stackedWidget->widget(2));
+    stackedWidget2->addWidget(ui->stackedWidget->widget(2)); // Page VIDEO
     stackedWidget2->addWidget(ui->stackedWidget->widget(2));
     stackedWidget2->addWidget(ui->stackedWidget->widget(2));
     screen2->setCentralWidget(stackedWidget2);
     screen2->show();
 
-    // Maps Function
+    // Maps Function - Page SETTING
     ui->map->setSource(QUrl(QStringLiteral("qrc:///img/map.qml")));
     ui->map->show();
-
     auto obj = ui->map->rootObject();
     connect(this, SIGNAL(setCenter(QVariant, QVariant)), obj, SLOT(setCenter(QVariant, QVariant)));
     connect(this, SIGNAL(addMarker(QVariant, QVariant)), obj, SLOT(addMarker(QVariant, QVariant)));
 
+    // Maps Function - Page MAPS
     ui->map2->setSource(QUrl(QStringLiteral("qrc:///img/map.qml")));
     ui->map2->show();
-
     auto obj2 = ui->map2->rootObject();
     connect(this, SIGNAL(setCenter(QVariant, QVariant)), obj2, SLOT(setCenter(QVariant, QVariant)));
     connect(this, SIGNAL(addMarker(QVariant, QVariant)), obj2, SLOT(addMarker(QVariant, QVariant)));
 
+    // Update Maps
     emit setCenter(-7.163410, 111.885800);
     emit addMarker(-7.163410, 111.885800);
 
     // Shortcuts
     QShortcut *exitShortcut = new QShortcut(QKeySequence(Qt::Key_Escape), this);
     connect(exitShortcut, &QShortcut::activated, this, &MainWindow::exitApplication);
-    QShortcut *logout = new QShortcut(QKeySequence(Qt::Key_PageDown), this);
-    connect(logout, &QShortcut::activated, this, &MainWindow::logout);
 
-    // Buat QGraphicsScene
+    // QGraphicsScene for Video Player
     QGraphicsScene *scene = new QGraphicsScene(screen2);
     ui->graphicsView->setScene(scene);
     scene->setBackgroundBrush(Qt::black);
 
-    // Buat QMediaPlayer dan QGraphicsVideoItem
+    // QMediaPlayer dan QGraphicsVideoItem
     player = new QMediaPlayer(screen2);
     video  = new QGraphicsVideoItem;
     player->setVideoOutput(video);
@@ -73,13 +81,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setFrameStyle(QFrame::NoFrame);
     ui->graphicsView->setAlignment(Qt::AlignCenter);
 
-    // Audio Setup
+    // Audio Setup - Init to 50%
     audio = new QAudioOutput();
     audio->setVolume(0.5);
     ui->slider_volume->setSliderPosition(50);
     player->setAudioOutput(audio);
 
-    // Background KAI ketika video pause
+    // Background KAI when video paused
     pauseOverlay = new QGraphicsPixmapItem(QPixmap(":/img/img/KAI.png").scaled(1920, 1080, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
     pauseOverlay->setZValue(1);
     pauseOverlay->setVisible(false);
@@ -95,6 +103,7 @@ MainWindow::MainWindow(QWidget *parent)
         QString fullPath = dir.absoluteFilePath(fileName);
         ui->list_entertainment->addItem(fullPath);
     }
+    // Play video for first index
     indexVideo = 0;
     videoPath = ui->list_entertainment->item(indexVideo)->text();
     ui->list_entertainment->setCurrentRow(indexVideo);
@@ -130,6 +139,7 @@ MainWindow::MainWindow(QWidget *parent)
         file.close();
     }
     ui->list_stasiun->setEnabled(false);
+    // when BYPASS GPS
     connect(ui->list_stasiun, &QComboBox::currentIndexChanged, this, [=](int index) {
         index = index - 1;
         if (index >= 0 && index < gpsStasiun.size()) {
@@ -175,7 +185,7 @@ MainWindow::MainWindow(QWidget *parent)
     // Running Text
     // showRunningText("Prototipe PIDS untuk kereta lama dengan tampilan peta live tracking oleh Mahasiswa Kerja Praktik PENS Divisi Teknologi PT. Rekaindo Global Jasa, Madiun - Surabaya - Bojonegoro - DH25", screen2);
 
-    // Config Init
+    // Init Last Config
     QString settingsPath = QCoreApplication::applicationDirPath() + "/configTrackingKA.ini";
     QSettings settings(settingsPath, QSettings::IniFormat);
     ui->csot_id->setText(settings.value("CSOT/ID", "").toString());
@@ -189,19 +199,19 @@ MainWindow::MainWindow(QWidget *parent)
     showRunningText(settings.value("RUNNING_TEXT/Text", "").toString(), screen2);
 
     QString filePath = "C:/DataBasePIDS/GAPEKA/" + settings.value("GAPEKA/Folder","").toString() + "/" + settings.value("GAPEKA/NomorKA","").toString() + "," + settings.value("GAPEKA/NamaKA","").toString() + "," + settings.value("GAPEKA/RelasiKA","").toString() + ".csv";
-    // qDebug() << filePath;
     init_gapeka_config(filePath);
 
     // Init Page & Video
     index = 0;
     counter = 0;
 
-    // Tampilan pertama adalah page Login
+    // First display is LOGIN Page
     ui->stackedWidget->setCurrentIndex(0);
 }
 
 MainWindow::~MainWindow()
 {
+    // Destructor Serial Port
     if (serialPort && serialPort->isOpen())
         serialPort->close();
     delete serialPort;
@@ -227,15 +237,15 @@ void MainWindow::mainLoop()
     // End of - Tampilan kedip pada jam
 
 
-    // Begin of - Switch tampilan CSOT dan Video
+    // Begin of - Switch Page VIDEO then CSOT then MAPS then looping
     stackedWidget2->setCurrentIndex(index);
     counter++;
-    if(counter >= 10) { // 10 karena tick loop setiap 500ms, jadi 10*500ms = 5000ms (5 detik)
+    if(counter >= 10) { // 10 karena tick increment setiap 500ms, jadi 10*500ms = 5000ms (5 detik)
         index++; // ganti index tampilan
         if(index>2) index=0;
         counter = 0; // reset nilai counter
     }
-    // End of - Switch tampilan CSOT dan Video
+    // End of - Switch Page VIDEO then CSOT then MAPS then looping
 
 
     // Begin of - Update GPS
@@ -276,22 +286,26 @@ void MainWindow::mainLoop()
     }
     prevSt = currentSt;
 
+    // Calculate distance now and St
     distance = haversine(latitudeNow.replace(",", ".").toDouble(),
                          longitudeNow.replace(",", ".").toDouble(),
                          latitudeSt.replace(",", ".").toDouble(),
                          longitudeSt.replace(",", ".").toDouble());
     qDebug() << distance;
 
+    // jika lebih dari 1 km maka sudah dianggap Dalam Perjalanan
     if (distance > 1.0) {
         currentSt = "Dalam Perjalanan";
         otw = true;
     }
 
+    // jika Dalam Perjalanan lalu jarak kurang dari 1 km maka sudah dianggap masuk nextSt
     if (currentSt == "Dalam Perjalanan" && distance < 1.0) {
         currentSt = nextSt;
         otw = false;
     }
 
+    // ketika sampai stasiun time real departure tampil jam sekarang hingga berangkat
     if (!otw)
         ui->real_dep->setText(time.toString("hh:mm:ss"));
     // End of - Update ETA
@@ -299,7 +313,12 @@ void MainWindow::mainLoop()
     // qDebug() << currentSt << " " << latitude << " " << longitude;
 }
 
-QPixmap MainWindow::roundedPixmap(const QPixmap &src, int radius)
+
+
+
+/////////////////////////////////////////////////      USER CODE BEGIN User Functions    /////////////////////////////////////////////////
+
+QPixmap MainWindow::roundedPixmap(const QPixmap &src, int radius)   // MEMBUAT GAMBAR CSOT
 {
     if (src.isNull()) {
         QMessageBox::warning(nullptr, "Error", "Gambar tidak ditemukan atau gagal dimuat!");
@@ -328,7 +347,7 @@ QPixmap MainWindow::roundedPixmap(const QPixmap &src, int radius)
     return pixmap;
 }
 
-void MainWindow::showRunningText(const QString &text, QWidget *parent)
+void MainWindow::showRunningText(const QString &text, QWidget *parent)  // MENAMPILKAN TEKS BERJALAN
 {
     const QString separator = "   |   ";
     for (QObject* child : parent->children()) {
@@ -366,7 +385,7 @@ void MainWindow::showRunningText(const QString &text, QWidget *parent)
     animation->start();
 }
 
-void MainWindow::addPicture(const QString &filepath)
+void MainWindow::addPicture(const QString &filepath)    // MENAMPILKAN FOTO CSOT
 {
     QPixmap pixmap(filepath);
     if (pixmap.isNull()) {
@@ -376,7 +395,7 @@ void MainWindow::addPicture(const QString &filepath)
     ui->pict_2->setPixmap(roundedImage.scaled(521, 521, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
-void MainWindow::exitApplication()
+void MainWindow::exitApplication()  // KELUAR APLIKASI
 {
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(
@@ -391,19 +410,26 @@ void MainWindow::exitApplication()
     }
 }
 
-void MainWindow::logout()
+void MainWindow::logout()   // LOGOUT DARI PAGE SETTING
 {
     ui->stackedWidget->setCurrentIndex(0);
     ui->username->clear();
     ui->password->clear();
 }
 
-void MainWindow::on_logout_clicked()
+/////////////////////////////////////////////////      USER CODE END User Functions    /////////////////////////////////////////////////
+
+
+
+
+/////////////////////////////////////////////////      USER CODE BEGIN UI Slots    /////////////////////////////////////////////////
+
+void MainWindow::on_logout_clicked()    // LOGOUT
 {
     logout();
 }
 
-void MainWindow::on_login_button_pressed()
+void MainWindow::on_login_button_pressed()  // LOGIN
 {
     if(ui->username->text() == "admin" && ui->password->text() == "kai2025") {
         ui->stackedWidget->setCurrentIndex(1);
@@ -412,17 +438,17 @@ void MainWindow::on_login_button_pressed()
     }
 }
 
-void MainWindow::on_toggle_password_pressed()
+void MainWindow::on_toggle_password_pressed()   // TAMPILKAN PASSWORD
 {
     ui->password->setEchoMode(QLineEdit::Normal); // tampilkan teks
 }
 
-void MainWindow::on_toggle_password_released()
+void MainWindow::on_toggle_password_released()  // SEMBUNYIKAN PASSWORD
 {
     ui->password->setEchoMode(QLineEdit::Password); // sembunyikan teks
 }
 
-void MainWindow::on_send_text_clicked()
+void MainWindow::on_send_text_clicked() // KIRIM TEKS BERJALAN
 {
     showRunningText(ui->text_to_run->text(), screen2);
     QString settingsPath = QCoreApplication::applicationDirPath() + "/configTrackingKA.ini";
@@ -430,7 +456,7 @@ void MainWindow::on_send_text_clicked()
     settings.setValue("RUNNING_TEXT/Text", ui->text_to_run->text());
 }
 
-void MainWindow::on_send_csot_clicked()
+void MainWindow::on_send_csot_clicked() // KIRIM DATA CSOT
 {
     ui->name_2->setText(ui->csot_name->text().toUpper());
     ui->phone_2->setText(ui->csot_contact->text());
@@ -443,19 +469,19 @@ void MainWindow::on_send_csot_clicked()
     settings.setValue("CSOT/Kontak", ui->phone_2->text());
 }
 
-void MainWindow::on_btn_play_clicked()
+void MainWindow::on_btn_play_clicked()  // PLAY VIDEO
 {
     player->play();
     pauseOverlay->setVisible(false);
 }
 
-void MainWindow::on_btn_pause_clicked()
+void MainWindow::on_btn_pause_clicked() // PAUSE VIDEO
 {
     player->pause();
     pauseOverlay->setVisible(true);
 }
 
-void MainWindow::on_list_entertainment_itemSelectionChanged()
+void MainWindow::on_list_entertainment_itemSelectionChanged()   // GANTI PEMUTARAN VIDEO ENTERTAINMENT
 {
     videoPath = ui->list_entertainment->currentItem()->text();
     indexVideo = ui->list_entertainment->currentRow();
@@ -463,12 +489,12 @@ void MainWindow::on_list_entertainment_itemSelectionChanged()
     player->play();
 }
 
-void MainWindow::on_slider_volume_valueChanged(int value)
+void MainWindow::on_slider_volume_valueChanged(int value)   // VOLUME ENTERTAINMENT
 {
     audio->setVolume(value/100.0);
 }
 
-void MainWindow::on_btn_bypass_clicked(bool checked)
+void MainWindow::on_btn_bypass_clicked(bool checked)    // BYPASS GPS
 {
     if (checked) {
         ui->list_stasiun->setEnabled(true);
@@ -477,12 +503,12 @@ void MainWindow::on_btn_bypass_clicked(bool checked)
     }
 }
 
-void MainWindow::on_exit_button_clicked()
+void MainWindow::on_exit_button_clicked()   // KELUAR APLIKASI
 {
     exitApplication();
 }
 
-void MainWindow::on_browse_gapeka_clicked()
+void MainWindow::on_browse_gapeka_clicked() // BROWSE FILE GAPEKA
 {
     QString folderPath = "C:/DataBasePIDS/GAPEKA/" + ui->list_gapeka->currentText();
 
@@ -564,19 +590,19 @@ void MainWindow::on_browse_gapeka_clicked()
     settings.setValue("GAPEKA/RelasiKA", reka);
 }
 
-void MainWindow::on_send_gapeka_clicked()
+void MainWindow::on_send_gapeka_clicked()   // KIRIM DATA GAPEKA
 {
     ui->nama_ka_2->setText(noka + " " + naka.toUpper());
     ui->relasi_ka_2->setText(currentGapeka.first().st + " - " + currentGapeka.last().st);
     ui->car_name_0->setText(noka + " " + naka.toUpper());
 
     // ini untuk simulasi kereta sudah meninggalkan stasiun
-    otw = true;
-    updateTIME(currentSt);
-    currentSt = "Dalam Perjalanan";
+    // otw = true;
+    // updateTIME(currentSt);
+    // currentSt = "Dalam Perjalanan";
 }
 
-void MainWindow::init_gapeka_config(QString filePath)
+void MainWindow::init_gapeka_config(QString filePath)   // INIT SETTING TERAKHIR
 {
     QFileInfo fileInfo(filePath);
     QString fileName = fileInfo.completeBaseName();
@@ -651,12 +677,15 @@ void MainWindow::init_gapeka_config(QString filePath)
     ui->next_st_0->setText(nextSt);
 }
 
+/////////////////////////////////////////////////      USER CODE END UI Slots    /////////////////////////////////////////////////
 
 
 
 
-// DATA GPS   DATA GPS   DATA GPS   DATA GPS   DATA GPS   DATA GPS   DATA GPS   DATA GPS   DATA GPS
-void MainWindow::readGPSData()
+
+/////////////////////////////////////////////////      USER CODE BEGIN GPS Functions    /////////////////////////////////////////////////
+
+void MainWindow::readGPSData()  // BACA DATA SERIAL GPS
 {
     static QString buffer;
 
@@ -679,7 +708,7 @@ void MainWindow::readGPSData()
     }
 }
 
-bool MainWindow::parseRMC(const QString &nmea, QString &lat, QString &lon, QString &speed)
+bool MainWindow::parseRMC(const QString &nmea, QString &lat, QString &lon, QString &speed)  // PARSING DATA GPS GNRMC
 {
     auto parts = nmea.split(',');
     if (parts.size() < 8 || parts[2] != "A") return false;
@@ -701,7 +730,8 @@ bool MainWindow::parseRMC(const QString &nmea, QString &lat, QString &lon, QStri
     return true;
 }
 
-double MainWindow::haversine(double lat1, double lon1, double lat2, double lon2) {
+double MainWindow::haversine(double lat1, double lon1, double lat2, double lon2)    // HITUNG RADIUS GPS
+{
     const double R = 6371.0; // radius bumi dalam km
     double dLat = qDegreesToRadians(lat2 - lat1);
     double dLon = qDegreesToRadians(lon2 - lon1);
@@ -735,12 +765,16 @@ QString MainWindow::cariStasiunTerdekat(double currentLat, double currentLon) {
 }
 */
 
+/////////////////////////////////////////////////      USER CODE END GPS Functions    /////////////////////////////////////////////////
 
 
 
 
-// ETA GAPEKA   ETA GAPEKA   ETA GAPEKA   ETA GAPEKA   ETA GAPEKA   ETA GAPEKA   ETA GAPEKA
-void MainWindow::updateETA(const QString& nowSt) {
+
+/////////////////////////////////////////////////      USER CODE BEGIN GAPEKA Functions    /////////////////////////////////////////////////
+
+void MainWindow::updateETA(const QString& nowSt)    // UPDATE ETA STASIUN
+{
     int startIndex = -1;
     for (int i = 0; i < currentGapeka.size(); ++i) {
         if (currentGapeka[i].st == nowSt) {
@@ -798,7 +832,8 @@ void MainWindow::updateETA(const QString& nowSt) {
     }
 }
 
-void MainWindow::updateTIME(const QString& nowSt) {
+void MainWindow::updateTIME(const QString& nowSt)   // UPDATE ETA WAKTU
+{
     int startIndex = -1;
     for (int i = 0; i < currentGapeka.size(); ++i) {
         if (currentGapeka[i].st == nowSt) {
@@ -862,7 +897,7 @@ void MainWindow::updateTIME(const QString& nowSt) {
     }
 }
 
-QString MainWindow::calculateDelay(const QTime &currentTime, const QTime &etaTime)
+QString MainWindow::calculateDelay(const QTime &currentTime, const QTime &etaTime)  // HITUNG WAKTU DELAY ETA
 {
     if (!etaTime.isValid()) return "-";
 
@@ -880,4 +915,13 @@ QString MainWindow::calculateDelay(const QTime &currentTime, const QTime &etaTim
         .arg(minutes, 2, 10, QChar('0'))
         .arg(seconds, 2, 10, QChar('0'));
 }
+
+/////////////////////////////////////////////////      USER CODE BEGIN GAPEKA Functions    /////////////////////////////////////////////////
+
+
+
+
+// END OF PROGRAM
+// Created by PT. Rekaindo GLobal Jasa Engineer Team and Mechatronics PENS
+// Copyright 2025
 

@@ -1,3 +1,10 @@
+/*
+ * Author   : PT. Rekaindo Global Jasa Engineer Team X Mechatronics PENS
+ * Date     : 08/05/2025
+ * Note     :
+ * Contact  : 081235738756
+*/
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -12,7 +19,6 @@
 #include <QScreen>
 #include <QWindow>
 #include <QStackedWidget>
-
 #include <QVideoWidget>
 #include <QAudioOutput>
 #include <QMediaDevices>
@@ -24,7 +30,6 @@
 #include <QPropertyAnimation>
 #include <QGraphicsOpacityEffect>
 #include <QParallelAnimationGroup>
-
 #include <QDir>
 #include <QFile>
 #include <QPixmap>
@@ -39,15 +44,11 @@
 #include <QVector>
 #include <QVariant>
 #include <QQuickItem>
-
 #include <QGraphicsVideoItem>
 #include <QGraphicsScene>
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QSerialPort>
-
-#define GAPEKA  1
-#define STASIUN 0
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -64,34 +65,38 @@ public:
     ~MainWindow();
 
 private:
+    // Constructor Mainwindow
     Ui::MainWindow *ui;
-    // Video
+
+    // Media Player
     QGraphicsVideoItem  *video;
     QMediaPlayer        *player;
     QAudioOutput        *audio;
+
+    // External Screen
     QMainWindow         *screen2;
     QStackedWidget      *stackedWidget2;
 
-    // Picture
+    // Picture Overlay
     QLabel              *image;
     QGraphicsPixmapItem *pauseOverlay = nullptr;
 
     // Global Variable
-    QList<QString> entertainment;
-    QTimer *timer;
-    QLabel *label;
+    QList<QString> entertainment;   // list entertainment
+    QTimer *timer;  // main loop timer
+    QLabel *label;  // label for running text
     int index,
         indexVideo,
         counter;
     QString videoPath,
-            noka,
-            naka,
-            reka;
+            noka,   // nomor KA
+            naka,   // nama KA
+            reka;   // rute KA
     QDate date;
     QTime time;
-    bool otw = false;
+    bool otw = false;   // flag Dalam Perjalanan
 
-    // GPS   GPS   GPS   GPS   GPS   GPS   GPS   GPS   GPS   GPS
+    // Untuk GPS
     QSerialPort *serialPort;
     QString currentSt   = "N/A",
             prevSt      = "N/A",
@@ -106,60 +111,65 @@ private:
         QString lat;
         QString lon;
     };
-    QVector<dataStasiun> gpsStasiun;
+    QVector<dataStasiun> gpsStasiun;    // list data gps stasiun
     double distance = 0.0;
 
-    // GAPEKA   GAPEKA   GAPEKA   GAPEKA   GAPEKA   GAPEKA
+    // Untuk GAPEKA
     QString arrival   = "N/A",
             departure = "N/A",
             delay     = "N/A";
     struct dataGapeka {
-        QString st;
-        QString arr;
-        QString dep;
+        QString st;     // nama stasiun
+        QString arr;    // time arrival
+        QString dep;    // time departure
     };
-    QVector<dataGapeka> currentGapeka;
+    QVector<dataGapeka> currentGapeka;  // list perhentian kereta
 
 signals:
+    // Untuk Maps GPS
     void setCenter(QVariant, QVariant);
     void addMarker(QVariant, QVariant);
 
 private slots:
-    // GPS   GPS   GPS   GPS   GPS   GPS   GPS   GPS   GPS   GPS
+    // GPS Functions
     bool parseRMC(const QString &nmea, QString &lat, QString &lon, QString &speed);
     void readGPSData();
     double haversine(double lat1, double lon1, double lat2, double lon2);
     // QString cariStasiunTerdekat(double currentLat, double currentLon);
 
-    // GAPEKA   GAPEKA   GAPEKA   GAPEKA   GAPEKA   GAPEKA
+    // GAPEKA Functions
     void updateETA(const QString& nowSt);
     QString calculateDelay(const QTime &currentTime, const QTime &etaTime);
     void updateTIME(const QString& nowSt);
     void init_gapeka_config(QString filePath);
 
-    // Main System   Main System   Main System   Main System
+    // Main System
     void mainLoop();
 
-    // UI Slots   UI Slots   UI Slots   UI Slots   UI Slots
+    // UI Slots
     void exitApplication();
     void logout();
     QPixmap roundedPixmap(const QPixmap &src, int radius);
     void showRunningText(const QString &text, QWidget *parent);
     void addPicture(const QString &filepath);
 
-    void on_logout_clicked();
-    void on_login_button_pressed();
-    void on_toggle_password_pressed();
-    void on_toggle_password_released();
-    void on_send_text_clicked();
-    void on_send_csot_clicked();
-    void on_btn_play_clicked();
-    void on_btn_pause_clicked();
-    void on_list_entertainment_itemSelectionChanged();
-    void on_slider_volume_valueChanged(int value);
-    void on_btn_bypass_clicked(bool checked);
-    void on_browse_gapeka_clicked();
-    void on_send_gapeka_clicked();
-    void on_exit_button_clicked();
+    void on_logout_clicked();                           // btn logout
+    void on_login_button_pressed();                     // btn login
+    void on_toggle_password_pressed();                  // show password
+    void on_toggle_password_released();                 // hide password
+    void on_send_text_clicked();                        // send running text
+    void on_send_csot_clicked();                        // send csot data
+    void on_btn_play_clicked();                         // play video
+    void on_btn_pause_clicked();                        // pause video
+    void on_list_entertainment_itemSelectionChanged();  // play selected video
+    void on_slider_volume_valueChanged(int value);      // changed volume
+    void on_btn_bypass_clicked(bool checked);           // bypass GPS
+    void on_browse_gapeka_clicked();                    // browse GAPEKA
+    void on_send_gapeka_clicked();                      // send GAPEKA
+    void on_exit_button_clicked();                      // btn exit app
 };
 #endif // MAINWINDOW_H
+
+// END OF PROGRAM
+// Created by PT. Rekaindo GLobal Jasa Engineer Team and Mechatronics PENS
+// Copyright 2025
