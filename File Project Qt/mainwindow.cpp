@@ -1,7 +1,7 @@
 /*!
  * Author   : Diki Hermawan
  * Company  : PT. Rekaindo Global Jasa Engineer Team X Mechatronics PENS
- * Date     : 08/05/2025
+ * Date     : 09/05/2025
  * Contact  : hermawansocmed@gmail.com
  * Note     : -
 */
@@ -36,9 +36,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Move page CSOT, VIDEO, and MAPS to other stackedWidget for external screen
     stackedWidget2 = new QStackedWidget(screen2);
-    stackedWidget2->addWidget(ui->stackedWidget->widget(2)); // Page VIDEO
-    stackedWidget2->addWidget(ui->stackedWidget->widget(2));
-    stackedWidget2->addWidget(ui->stackedWidget->widget(2));
+    stackedWidget2->addWidget(ui->stackedWidget->widget(2));    // Page VIDEO
+    stackedWidget2->addWidget(ui->stackedWidget->widget(2));    // Page CSOT
+    stackedWidget2->addWidget(ui->stackedWidget->widget(2));    // Page MAPS
     screen2->setCentralWidget(stackedWidget2);
     screen2->show();
 
@@ -174,8 +174,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Serial GPS
     serialPort = new QSerialPort(this);
-    serialPort->setPortName("COM8");
-    serialPort->setBaudRate(QSerialPort::Baud4800);
+    serialPort->setPortName("COM8");    // COM8
+    serialPort->setBaudRate(QSerialPort::Baud4800); // Baudrate 4800
     serialPort->open(QIODevice::ReadOnly);
 
     // Timer Main Loop
@@ -220,7 +220,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::mainLoop()
+void MainWindow::mainLoop() // MAIN SYSTEM
 {
     // Begin of - Tampilan kedip pada jam
     static bool toggleColon = true;
@@ -313,8 +313,6 @@ void MainWindow::mainLoop()
 
     // qDebug() << currentSt << " " << latitude << " " << longitude;
 }
-
-
 
 
 /////////////////////////////////////////////////      USER CODE BEGIN User Functions    /////////////////////////////////////////////////
@@ -432,6 +430,7 @@ void MainWindow::on_logout_clicked()    // LOGOUT
 
 void MainWindow::on_login_button_pressed()  // LOGIN
 {
+    // masuk page SETTING ketika berhasil
     if(ui->username->text() == "admin" && ui->password->text() == "kai2025") {
         ui->stackedWidget->setCurrentIndex(1);
     } else {
@@ -452,6 +451,7 @@ void MainWindow::on_toggle_password_released()  // SEMBUNYIKAN PASSWORD
 void MainWindow::on_send_text_clicked() // KIRIM TEKS BERJALAN
 {
     showRunningText(ui->text_to_run->text(), screen2);
+    // simpan settingan teks berjalan
     QString settingsPath = QCoreApplication::applicationDirPath() + "/configTrackingKA.ini";
     QSettings settings(settingsPath, QSettings::IniFormat);
     settings.setValue("RUNNING_TEXT/Text", ui->text_to_run->text());
@@ -462,7 +462,7 @@ void MainWindow::on_send_csot_clicked() // KIRIM DATA CSOT
     ui->name_2->setText(ui->csot_name->text().toUpper());
     ui->phone_2->setText(ui->csot_contact->text());
     addPicture("C:/DataBasePIDS/FotoCSOT/" + ui->csot_id->text() + ".jpg");
-
+    // simpan settingan data CSOT
     QString settingsPath = QCoreApplication::applicationDirPath() + "/configTrackingKA.ini";
     QSettings settings(settingsPath, QSettings::IniFormat);
     settings.setValue("CSOT/ID", ui->csot_id->text());
@@ -511,6 +511,7 @@ void MainWindow::on_exit_button_clicked()   // KELUAR APLIKASI
 
 void MainWindow::on_browse_gapeka_clicked() // BROWSE FILE GAPEKA
 {
+    // buka file GAPEKA
     QString folderPath = "C:/DataBasePIDS/GAPEKA/" + ui->list_gapeka->currentText();
 
     QDir dir(folderPath);
@@ -530,7 +531,7 @@ void MainWindow::on_browse_gapeka_clicked() // BROWSE FILE GAPEKA
         QMessageBox::warning(this, "Format Tidak Sesuai", "Nama file harus dalam format: Kode,Nama,Rute.ext");
         return;
     }
-
+    // set nomor KA, nama KA, rute KA sesuai nama file GAPEKA
     noka = dataSplit[0].trimmed();
     naka = dataSplit[1].trimmed();
     reka = dataSplit[2].trimmed();
@@ -539,6 +540,7 @@ void MainWindow::on_browse_gapeka_clicked() // BROWSE FILE GAPEKA
     ui->nomor_ka->setText(noka);
     ui->relasi_ka->setText(reka);
 
+    // reset data perjalanan KA
     currentGapeka.clear();
     QFile file(filePath);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -556,6 +558,7 @@ void MainWindow::on_browse_gapeka_clicked() // BROWSE FILE GAPEKA
         file.close();
     }
 
+    // print data perjalanan KA
     // for (const auto &data : currentGapeka) {
     //     qDebug() << data.st << data.arr << data.dep;
     // }
@@ -582,7 +585,7 @@ void MainWindow::on_browse_gapeka_clicked() // BROWSE FILE GAPEKA
             break;
         }
     }
-
+    // simpan settingan
     QString settingsPath = QCoreApplication::applicationDirPath() + "/configTrackingKA.ini";
     QSettings settings(settingsPath, QSettings::IniFormat);
     settings.setValue("GAPEKA/Folder", ui->list_gapeka->currentText());
@@ -605,6 +608,7 @@ void MainWindow::on_send_gapeka_clicked()   // KIRIM DATA GAPEKA
 
 void MainWindow::init_gapeka_config(QString filePath)   // INIT SETTING TERAKHIR
 {
+    // buka file GAPEKA
     QFileInfo fileInfo(filePath);
     QString fileName = fileInfo.completeBaseName();
 
@@ -613,7 +617,7 @@ void MainWindow::init_gapeka_config(QString filePath)   // INIT SETTING TERAKHIR
         QMessageBox::warning(this, "Format Tidak Sesuai", "Nama file harus dalam format: Kode,Nama,Rute.ext");
         return;
     }
-
+    // set nomor KA, nama KA, rute KA sesuai nama file GAPEKA
     noka = dataSplit[0].trimmed();
     naka = dataSplit[1].trimmed();
     reka = dataSplit[2].trimmed();
@@ -622,6 +626,7 @@ void MainWindow::init_gapeka_config(QString filePath)   // INIT SETTING TERAKHIR
     ui->nomor_ka->setText(noka);
     ui->relasi_ka->setText(reka);
 
+    // reset data perjalanan KA
     currentGapeka.clear();
     QFile file(filePath);
     qDebug() << filePath;
@@ -639,7 +644,7 @@ void MainWindow::init_gapeka_config(QString filePath)   // INIT SETTING TERAKHIR
         }
         file.close();
     }
-
+    // print data perjalanan
     for (const auto &data : currentGapeka) {
         qDebug() << data.st << data.arr << data.dep;
     }
@@ -669,9 +674,13 @@ void MainWindow::init_gapeka_config(QString filePath)   // INIT SETTING TERAKHIR
     }
     QString settingsPath = QCoreApplication::applicationDirPath() + "/configTrackingKA.ini";
     QSettings settings(settingsPath, QSettings::IniFormat);
+    // init currentSt
     currentSt = settings.value("GAPEKA/CurrentSt", "").toString();
+    // init ETA stasiun
     updateETA(currentSt);
+    // init ETA time
     updateTIME(currentSt);
+    // send GAPEKA
     on_send_gapeka_clicked();
 
     ui->curr_st_0->setText(currentSt);
@@ -692,14 +701,14 @@ void MainWindow::readGPSData()  // BACA DATA SERIAL GPS
 
     if (!serialPort || !serialPort->isOpen())
         return;
-
+    // baca serial data simpan ke buffer
     buffer += QString::fromLatin1(serialPort->readAll());
 
     int idx;
     while ((idx = buffer.indexOf('\n')) != -1) {
         QString line = buffer.left(idx).trimmed();
         buffer.remove(0, idx + 1);
-
+        // start with $GNRMC
         if (line.startsWith("$GNRMC")) {
             if (parseRMC(line, latitudeNow, longitudeNow, speed)) {
                 // data ok
@@ -836,17 +845,20 @@ void MainWindow::updateETA(const QString& nowSt)    // UPDATE ETA STASIUN
 void MainWindow::updateTIME(const QString& nowSt)   // UPDATE ETA WAKTU
 {
     int startIndex = -1;
+    // cari index dengan elemen yang sama dengan input
     for (int i = 0; i < currentGapeka.size(); ++i) {
         if (currentGapeka[i].st == nowSt) {
             startIndex = i;
             break;
         }
     }
+    // eksekusi ketika start index ketemu
     if (startIndex != -1) {
         ui->real_dep->setText(time.toString("hh:mm:ss"));
         delay = calculateDelay(time, QTime::fromString(currentGapeka[startIndex].dep, "hh:mm:ss")).left(6);
         ui->diff_dep->setText(delay);
 
+        // set tesxt delay
         ui->eta_delay_1_1->setText(delay);
         ui->eta_delay_2_1->setText(delay);
         ui->eta_delay_3_1->setText(delay);
@@ -857,6 +869,7 @@ void MainWindow::updateTIME(const QString& nowSt)   // UPDATE ETA WAKTU
         ui->eta_delay_3_2->setText(delay);
         ui->eta_delay_4_2->setText(delay);
 
+        // reset text estimated time
         ui->eta_plus_1_1->setText("-:-");
         ui->eta_plus_1_2->setText("-:-");
         ui->eta_plus_2_1->setText("-:-");
