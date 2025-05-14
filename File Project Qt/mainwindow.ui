@@ -32,7 +32,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page_login">
      <widget class="QLabel" name="background_login">
@@ -386,7 +386,7 @@ QPushButton:hover {
      <widget class="QLineEdit" name="text_to_run">
       <property name="geometry">
        <rect>
-        <x>90</x>
+        <x>105</x>
         <y>920</y>
         <width>1546</width>
         <height>31</height>
@@ -420,7 +420,7 @@ border:1px solid rgb(247, 248, 249);</string>
      <widget class="QPushButton" name="send_text">
       <property name="geometry">
        <rect>
-        <x>1660</x>
+        <x>1675</x>
         <y>908</y>
         <width>131</width>
         <height>50</height>
@@ -457,7 +457,7 @@ QPushButton:pressed {
      <widget class="QPushButton" name="send_csot">
       <property name="geometry">
        <rect>
-        <x>78</x>
+        <x>93</x>
         <y>480</y>
         <width>354</width>
         <height>56</height>
@@ -494,7 +494,7 @@ QPushButton:pressed {
      <widget class="QLineEdit" name="csot_id">
       <property name="geometry">
        <rect>
-        <x>90</x>
+        <x>105</x>
         <y>250</y>
         <width>326</width>
         <height>36</height>
@@ -531,7 +531,7 @@ border:1px solid rgb(247, 248, 249);</string>
      <widget class="QLineEdit" name="csot_name">
       <property name="geometry">
        <rect>
-        <x>90</x>
+        <x>105</x>
         <y>335</y>
         <width>326</width>
         <height>36</height>
@@ -568,7 +568,7 @@ border:1px solid rgb(247, 248, 249);</string>
      <widget class="QLineEdit" name="csot_contact">
       <property name="geometry">
        <rect>
-        <x>90</x>
+        <x>105</x>
         <y>418</y>
         <width>326</width>
         <height>36</height>
@@ -605,7 +605,7 @@ border:1px solid rgb(247, 248, 249);</string>
      <widget class="QPushButton" name="btn_play">
       <property name="geometry">
        <rect>
-        <x>1375</x>
+        <x>1390</x>
         <y>465</y>
         <width>56</width>
         <height>56</height>
@@ -631,7 +631,7 @@ QPushButton:hover {
      <widget class="QPushButton" name="btn_pause">
       <property name="geometry">
        <rect>
-        <x>1445</x>
+        <x>1460</x>
         <y>465</y>
         <width>56</width>
         <height>56</height>
@@ -657,7 +657,7 @@ QPushButton:hover {
      <widget class="QListWidget" name="list_entertainment">
       <property name="geometry">
        <rect>
-        <x>1155</x>
+        <x>1170</x>
         <y>250</y>
         <width>566</width>
         <height>201</height>
@@ -692,7 +692,7 @@ QListWidget::item:hover {
      <widget class="QSlider" name="slider_volume">
       <property name="geometry">
        <rect>
-        <x>1750</x>
+        <x>1765</x>
         <y>245</y>
         <width>31</width>
         <height>216</height>
@@ -720,7 +720,7 @@ QListWidget::item:hover {
      <widget class="QCheckBox" name="btn_bypass">
       <property name="geometry">
        <rect>
-        <x>1065</x>
+        <x>1080</x>
         <y>630</y>
         <width>121</width>
         <height>26</height>
@@ -743,7 +743,7 @@ QListWidget::item:hover {
      <widget class="QComboBox" name="list_stasiun">
       <property name="geometry">
        <rect>
-        <x>1185</x>
+        <x>1200</x>
         <y>627</y>
         <width>341</width>
         <height>31</height>
@@ -790,7 +790,7 @@ QListWidget::item:hover {
      <widget class="QComboBox" name="list_gapeka">
       <property name="geometry">
        <rect>
-        <x>505</x>
+        <x>520</x>
         <y>243</y>
         <width>571</width>
         <height>51</height>
@@ -829,7 +829,7 @@ QListWidget::item:hover {
      <widget class="QPushButton" name="browse_gapeka">
       <property name="geometry">
        <rect>
-        <x>505</x>
+        <x>520</x>
         <y>310</y>
         <width>391</width>
         <height>51</height>
@@ -866,7 +866,7 @@ QPushButton:pressed {
      <widget class="QPushButton" name="send_gapeka">
       <property name="geometry">
        <rect>
-        <x>905</x>
+        <x>920</x>
         <y>310</y>
         <width>171</width>
         <height>51</height>
@@ -903,7 +903,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="curr_st">
       <property name="geometry">
        <rect>
-        <x>405</x>
+        <x>420</x>
         <y>775</y>
         <width>221</width>
         <height>51</height>
@@ -932,7 +932,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="next_st">
       <property name="geometry">
        <rect>
-        <x>405</x>
+        <x>420</x>
         <y>840</y>
         <width>181</width>
         <height>51</height>
@@ -958,7 +958,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="final_st">
       <property name="geometry">
        <rect>
-        <x>635</x>
+        <x>650</x>
         <y>645</y>
         <width>181</width>
         <height>51</height>
@@ -984,7 +984,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="gps_latitude">
       <property name="geometry">
        <rect>
-        <x>405</x>
+        <x>420</x>
         <y>650</y>
         <width>181</width>
         <height>31</height>
@@ -1007,7 +1007,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="gps_longitude">
       <property name="geometry">
        <rect>
-        <x>405</x>
+        <x>420</x>
         <y>715</y>
         <width>181</width>
         <height>31</height>
@@ -1030,7 +1030,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="real_arr">
       <property name="geometry">
        <rect>
-        <x>635</x>
+        <x>650</x>
         <y>715</y>
         <width>181</width>
         <height>31</height>
@@ -1053,7 +1053,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="real_dep">
       <property name="geometry">
        <rect>
-        <x>635</x>
+        <x>650</x>
         <y>780</y>
         <width>181</width>
         <height>31</height>
@@ -1076,7 +1076,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="speed">
       <property name="geometry">
        <rect>
-        <x>635</x>
+        <x>650</x>
         <y>845</y>
         <width>181</width>
         <height>31</height>
@@ -1099,7 +1099,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="diff_arr">
       <property name="geometry">
        <rect>
-        <x>865</x>
+        <x>880</x>
         <y>715</y>
         <width>181</width>
         <height>31</height>
@@ -1122,7 +1122,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="diff_dep">
       <property name="geometry">
        <rect>
-        <x>865</x>
+        <x>880</x>
         <y>785</y>
         <width>181</width>
         <height>31</height>
@@ -1145,7 +1145,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="eta_arr_1">
       <property name="geometry">
        <rect>
-        <x>1065</x>
+        <x>1080</x>
         <y>700</y>
         <width>101</width>
         <height>31</height>
@@ -1168,7 +1168,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="eta_arr_2">
       <property name="geometry">
        <rect>
-        <x>1065</x>
+        <x>1080</x>
         <y>750</y>
         <width>101</width>
         <height>31</height>
@@ -1191,7 +1191,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="eta_arr_3">
       <property name="geometry">
        <rect>
-        <x>1065</x>
+        <x>1080</x>
         <y>800</y>
         <width>101</width>
         <height>31</height>
@@ -1214,7 +1214,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="eta_arr_4">
       <property name="geometry">
        <rect>
-        <x>1065</x>
+        <x>1080</x>
         <y>850</y>
         <width>96</width>
         <height>31</height>
@@ -1237,7 +1237,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="eta_dep_1">
       <property name="geometry">
        <rect>
-        <x>1220</x>
+        <x>1235</x>
         <y>700</y>
         <width>101</width>
         <height>31</height>
@@ -1260,7 +1260,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="eta_dep_2">
       <property name="geometry">
        <rect>
-        <x>1220</x>
+        <x>1235</x>
         <y>750</y>
         <width>101</width>
         <height>31</height>
@@ -1283,7 +1283,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="eta_dep_3">
       <property name="geometry">
        <rect>
-        <x>1220</x>
+        <x>1235</x>
         <y>800</y>
         <width>101</width>
         <height>31</height>
@@ -1306,7 +1306,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="eta_dep_4">
       <property name="geometry">
        <rect>
-        <x>1220</x>
+        <x>1235</x>
         <y>850</y>
         <width>101</width>
         <height>31</height>
@@ -1329,7 +1329,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="eta_st_1">
       <property name="geometry">
        <rect>
-        <x>1385</x>
+        <x>1400</x>
         <y>700</y>
         <width>400</width>
         <height>31</height>
@@ -1352,7 +1352,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="eta_st_2">
       <property name="geometry">
        <rect>
-        <x>1385</x>
+        <x>1400</x>
         <y>750</y>
         <width>400</width>
         <height>31</height>
@@ -1375,7 +1375,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="eta_st_3">
       <property name="geometry">
        <rect>
-        <x>1385</x>
+        <x>1400</x>
         <y>800</y>
         <width>400</width>
         <height>31</height>
@@ -1398,7 +1398,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="eta_st_4">
       <property name="geometry">
        <rect>
-        <x>1385</x>
+        <x>1400</x>
         <y>850</y>
         <width>400</width>
         <height>31</height>
@@ -1421,7 +1421,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="nomor_ka">
       <property name="geometry">
        <rect>
-        <x>510</x>
+        <x>525</x>
         <y>420</y>
         <width>181</width>
         <height>31</height>
@@ -1444,7 +1444,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="nama_ka">
       <property name="geometry">
        <rect>
-        <x>510</x>
+        <x>525</x>
         <y>445</y>
         <width>551</width>
         <height>51</height>
@@ -1467,7 +1467,7 @@ QPushButton:pressed {
      <widget class="QLabel" name="relasi_ka">
       <property name="geometry">
        <rect>
-        <x>510</x>
+        <x>525</x>
         <y>485</y>
         <width>181</width>
         <height>41</height>
@@ -1490,7 +1490,7 @@ QPushButton:pressed {
      <widget class="QPushButton" name="logout">
       <property name="geometry">
        <rect>
-        <x>1800</x>
+        <x>1815</x>
         <y>15</y>
         <width>56</width>
         <height>56</height>
@@ -1519,7 +1519,7 @@ QPushButton:hover {
      <widget class="QQuickWidget" name="map">
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>115</x>
         <y>625</y>
         <width>271</width>
         <height>271</height>
@@ -1527,6 +1527,55 @@ QPushButton:hover {
       </property>
       <property name="resizeMode">
        <enum>QQuickWidget::ResizeMode::SizeRootObjectToView</enum>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="curr_temp">
+      <property name="geometry">
+       <rect>
+        <x>880</x>
+        <y>845</y>
+        <width>36</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Leelawadee UI</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(247, 248, 249);
+color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>25</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_celcius">
+      <property name="geometry">
+       <rect>
+        <x>920</x>
+        <y>845</y>
+        <width>36</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Leelawadee UI</family>
+        <pointsize>12</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>°C</string>
       </property>
      </widget>
     </widget>
@@ -2111,10 +2160,10 @@ QPushButton:hover {
      <widget class="QLabel" name="temp_2">
       <property name="geometry">
        <rect>
-        <x>950</x>
-        <y>40</y>
+        <x>940</x>
+        <y>45</y>
         <width>161</width>
-        <height>71</height>
+        <height>61</height>
        </rect>
       </property>
       <property name="font">
@@ -2131,7 +2180,7 @@ QPushButton:hover {
        <string>N/A</string>
       </property>
       <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
+       <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
       </property>
      </widget>
      <widget class="QLabel" name="day_date_2">
@@ -2783,7 +2832,7 @@ QPushButton:hover {
      <widget class="QQuickWidget" name="map2">
       <property name="geometry">
        <rect>
-        <x>45</x>
+        <x>60</x>
         <y>145</y>
         <width>1801</width>
         <height>826</height>

@@ -19,12 +19,12 @@
         <file>img/CSOT.png</file>
         <file>img/gapeka.png</file>
         <file>img/send gapeka.png</file>
-        <file>img/SETTING.png</file>
         <file>img/logout.png</file>
         <file>img/KAI.png</file>
         <file>map.qml</file>
         <file>marker.png</file>
-        <file>img/MAPS.png</file>
         <file>img/LOGIN.png</file>
+        <file>img/MAPS.png</file>
+        <file>img/SETTING.png</file>
     </qresource>
 </RCC>

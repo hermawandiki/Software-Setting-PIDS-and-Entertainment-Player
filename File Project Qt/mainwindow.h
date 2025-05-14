@@ -1,7 +1,7 @@
 /*!
  * Author   : Diki Hermawan
  * Company  : PT. Rekaindo Global Jasa Engineer Team X Mechatronics PENS
- * Date     : 09/05/2025
+ * Date     : 14/05/2025
  * Contact  : hermawansocmed@gmail.com
  * Note     : -
 */
@@ -147,13 +147,15 @@ private slots:
     // Main System
     void mainLoop();
 
-    // UI Slots
+    // User Functions
     void exitApplication();
     void logout();
     QPixmap roundedPixmap(const QPixmap &src, int radius);
     void showRunningText(const QString &text, QWidget *parent);
     void addPicture(const QString &filepath);
+    void clearAllFocus();
 
+    // UI Slots
     void on_logout_clicked();                           // btn logout
     void on_login_button_pressed();                     // btn login
     void on_toggle_password_pressed();                  // show password
@@ -168,6 +170,7 @@ private slots:
     void on_browse_gapeka_clicked();                    // browse GAPEKA
     void on_send_gapeka_clicked();                      // send GAPEKA
     void on_exit_button_clicked();                      // btn exit app
+    void on_curr_temp_textChanged(const QString &arg1); // update temperature value
 };
 #endif // MAINWINDOW_H
 

@@ -1,7 +1,7 @@
 /*!
  * Author   : Diki Hermawan
  * Company  : PT. Rekaindo Global Jasa Engineer Team X Mechatronics PENS
- * Date     : 09/05/2025
+ * Date     : 14/05/2025
  * Contact  : hermawansocmed@gmail.com
  * Note     : -
 */
@@ -63,6 +63,8 @@ MainWindow::MainWindow(QWidget *parent)
     // Shortcuts
     QShortcut *exitShortcut = new QShortcut(QKeySequence(Qt::Key_Escape), this);
     connect(exitShortcut, &QShortcut::activated, this, &MainWindow::exitApplication);
+    QShortcut *focusShortcut = new QShortcut(QKeySequence(Qt::Key_Return), this);
+    connect(focusShortcut, &QShortcut::activated, this, &MainWindow::clearAllFocus);
 
     // QGraphicsScene for Video Player
     QGraphicsScene *scene = new QGraphicsScene(screen2);
@@ -201,6 +203,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QString filePath = "C:/DataBasePIDS/GAPEKA/" + settings.value("GAPEKA/Folder","").toString() + "/" + settings.value("GAPEKA/NomorKA","").toString() + "," + settings.value("GAPEKA/NamaKA","").toString() + "," + settings.value("GAPEKA/RelasiKA","").toString() + ".csv";
     init_gapeka_config(filePath);
+    ui->temp_2->setText(ui->curr_temp->text());
 
     // Init Page & Video
     index = 0;
@@ -416,6 +419,19 @@ void MainWindow::logout()   // LOGOUT DARI PAGE SETTING
     ui->password->clear();
 }
 
+void MainWindow::clearAllFocus()    // HILANGKAN SEMUA FOKUS INPUT
+{
+    ui->username->clearFocus();
+    ui->password->clearFocus();
+    ui->curr_temp->clearFocus();
+    ui->text_to_run->clearFocus();
+    ui->csot_id->clearFocus();
+    ui->csot_name->clearFocus();
+    ui->csot_contact->clearFocus();
+    ui->temp_2->setText(ui->curr_temp->text());
+    // qDebug() << ui->curr_temp->text();
+}
+
 /////////////////////////////////////////////////      USER CODE END User Functions    /////////////////////////////////////////////////
 
 
@@ -604,6 +620,11 @@ void MainWindow::on_send_gapeka_clicked()   // KIRIM DATA GAPEKA
     // otw = true;
     // updateTIME(currentSt);
     // currentSt = "Dalam Perjalanan";
+}
+
+void MainWindow::on_curr_temp_textChanged(const QString &arg1)  // UPDATE TEMPERATURE VALUE
+{
+    ui->temp_2->setText(ui->curr_temp->text());
 }
 
 void MainWindow::init_gapeka_config(QString filePath)   // INIT SETTING TERAKHIR

@@ -75,6 +75,7 @@ static constexpr auto qt_meta_stringdata_ZN10MainWindowE = QtMocHelpers::stringD
     "parent",
     "addPicture",
     "filepath",
+    "clearAllFocus",
     "on_logout_clicked",
     "on_login_button_pressed",
     "on_toggle_password_pressed",
@@ -90,7 +91,9 @@ static constexpr auto qt_meta_stringdata_ZN10MainWindowE = QtMocHelpers::stringD
     "checked",
     "on_browse_gapeka_clicked",
     "on_send_gapeka_clicked",
-    "on_exit_button_clicked"
+    "on_exit_button_clicked",
+    "on_curr_temp_textChanged",
+    "arg1"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -102,7 +105,7 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10MainWindowE[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-      29,   14, // methods
+      31,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -110,37 +113,39 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10MainWindowE[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    2,  188,    2, 0x06,    1 /* Public */,
-       4,    2,  193,    2, 0x06,    4 /* Public */,
+       1,    2,  200,    2, 0x06,    1 /* Public */,
+       4,    2,  205,    2, 0x06,    4 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       5,    4,  198,    2, 0x08,    7 /* Private */,
-      11,    0,  207,    2, 0x08,   12 /* Private */,
-      12,    4,  208,    2, 0x08,   13 /* Private */,
-      17,    1,  217,    2, 0x08,   18 /* Private */,
-      19,    2,  220,    2, 0x08,   20 /* Private */,
-      22,    1,  225,    2, 0x08,   23 /* Private */,
-      23,    1,  228,    2, 0x08,   25 /* Private */,
-      25,    0,  231,    2, 0x08,   27 /* Private */,
-      26,    0,  232,    2, 0x08,   28 /* Private */,
-      27,    0,  233,    2, 0x08,   29 /* Private */,
-      28,    2,  234,    2, 0x08,   30 /* Private */,
-      31,    2,  239,    2, 0x08,   33 /* Private */,
-      35,    1,  244,    2, 0x08,   36 /* Private */,
-      37,    0,  247,    2, 0x08,   38 /* Private */,
-      38,    0,  248,    2, 0x08,   39 /* Private */,
-      39,    0,  249,    2, 0x08,   40 /* Private */,
-      40,    0,  250,    2, 0x08,   41 /* Private */,
-      41,    0,  251,    2, 0x08,   42 /* Private */,
-      42,    0,  252,    2, 0x08,   43 /* Private */,
-      43,    0,  253,    2, 0x08,   44 /* Private */,
-      44,    0,  254,    2, 0x08,   45 /* Private */,
-      45,    0,  255,    2, 0x08,   46 /* Private */,
-      46,    1,  256,    2, 0x08,   47 /* Private */,
-      48,    1,  259,    2, 0x08,   49 /* Private */,
-      50,    0,  262,    2, 0x08,   51 /* Private */,
-      51,    0,  263,    2, 0x08,   52 /* Private */,
-      52,    0,  264,    2, 0x08,   53 /* Private */,
+       5,    4,  210,    2, 0x08,    7 /* Private */,
+      11,    0,  219,    2, 0x08,   12 /* Private */,
+      12,    4,  220,    2, 0x08,   13 /* Private */,
+      17,    1,  229,    2, 0x08,   18 /* Private */,
+      19,    2,  232,    2, 0x08,   20 /* Private */,
+      22,    1,  237,    2, 0x08,   23 /* Private */,
+      23,    1,  240,    2, 0x08,   25 /* Private */,
+      25,    0,  243,    2, 0x08,   27 /* Private */,
+      26,    0,  244,    2, 0x08,   28 /* Private */,
+      27,    0,  245,    2, 0x08,   29 /* Private */,
+      28,    2,  246,    2, 0x08,   30 /* Private */,
+      31,    2,  251,    2, 0x08,   33 /* Private */,
+      35,    1,  256,    2, 0x08,   36 /* Private */,
+      37,    0,  259,    2, 0x08,   38 /* Private */,
+      38,    0,  260,    2, 0x08,   39 /* Private */,
+      39,    0,  261,    2, 0x08,   40 /* Private */,
+      40,    0,  262,    2, 0x08,   41 /* Private */,
+      41,    0,  263,    2, 0x08,   42 /* Private */,
+      42,    0,  264,    2, 0x08,   43 /* Private */,
+      43,    0,  265,    2, 0x08,   44 /* Private */,
+      44,    0,  266,    2, 0x08,   45 /* Private */,
+      45,    0,  267,    2, 0x08,   46 /* Private */,
+      46,    0,  268,    2, 0x08,   47 /* Private */,
+      47,    1,  269,    2, 0x08,   48 /* Private */,
+      49,    1,  272,    2, 0x08,   50 /* Private */,
+      51,    0,  275,    2, 0x08,   52 /* Private */,
+      52,    0,  276,    2, 0x08,   53 /* Private */,
+      53,    0,  277,    2, 0x08,   54 /* Private */,
+      54,    1,  278,    2, 0x08,   55 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3,    2,    2,
@@ -169,11 +174,13 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10MainWindowE[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   47,
-    QMetaType::Void, QMetaType::Bool,   49,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   48,
+    QMetaType::Void, QMetaType::Bool,   50,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   55,
 
        0        // eod
 };
@@ -239,6 +246,8 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         // method 'addPicture'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'clearAllFocus'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_logout_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_login_button_pressed'
@@ -268,7 +277,10 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         // method 'on_send_gapeka_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_exit_button_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_curr_temp_textChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
     >,
     nullptr
 } };
@@ -297,20 +309,22 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             if (_a[0]) *reinterpret_cast< QPixmap*>(_a[0]) = std::move(_r); }  break;
         case 13: _t->showRunningText((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QWidget*>>(_a[2]))); break;
         case 14: _t->addPicture((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 15: _t->on_logout_clicked(); break;
-        case 16: _t->on_login_button_pressed(); break;
-        case 17: _t->on_toggle_password_pressed(); break;
-        case 18: _t->on_toggle_password_released(); break;
-        case 19: _t->on_send_text_clicked(); break;
-        case 20: _t->on_send_csot_clicked(); break;
-        case 21: _t->on_btn_play_clicked(); break;
-        case 22: _t->on_btn_pause_clicked(); break;
-        case 23: _t->on_list_entertainment_itemSelectionChanged(); break;
-        case 24: _t->on_slider_volume_valueChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 25: _t->on_btn_bypass_clicked((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
-        case 26: _t->on_browse_gapeka_clicked(); break;
-        case 27: _t->on_send_gapeka_clicked(); break;
-        case 28: _t->on_exit_button_clicked(); break;
+        case 15: _t->clearAllFocus(); break;
+        case 16: _t->on_logout_clicked(); break;
+        case 17: _t->on_login_button_pressed(); break;
+        case 18: _t->on_toggle_password_pressed(); break;
+        case 19: _t->on_toggle_password_released(); break;
+        case 20: _t->on_send_text_clicked(); break;
+        case 21: _t->on_send_csot_clicked(); break;
+        case 22: _t->on_btn_play_clicked(); break;
+        case 23: _t->on_btn_pause_clicked(); break;
+        case 24: _t->on_list_entertainment_itemSelectionChanged(); break;
+        case 25: _t->on_slider_volume_valueChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 26: _t->on_btn_bypass_clicked((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 27: _t->on_browse_gapeka_clicked(); break;
+        case 28: _t->on_send_gapeka_clicked(); break;
+        case 29: _t->on_exit_button_clicked(); break;
+        case 30: _t->on_curr_temp_textChanged((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         default: ;
         }
     }
@@ -364,14 +378,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 29)
+        if (_id < 31)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 29;
+        _id -= 31;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 29)
+        if (_id < 31)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 29;
+        _id -= 31;
     }
     return _id;
 }
