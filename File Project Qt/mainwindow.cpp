@@ -190,20 +190,22 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Init Last Config
     QString settingsPath = QCoreApplication::applicationDirPath() + "/configTrackingKA.ini";
-    QSettings settings(settingsPath, QSettings::IniFormat);
-    ui->csot_id->setText(settings.value("CSOT/ID", "").toString());
-    ui->csot_name->setText(settings.value("CSOT/Nama", "").toString());
-    ui->csot_contact->setText(settings.value("CSOT/Kontak", "").toString());
-    on_send_csot_clicked();
-    ui->csot_id->clear();
-    ui->csot_name->clear();
-    ui->csot_contact->clear();
+    if (QFile::exists(settingsPath)) {
+        QSettings settings(settingsPath, QSettings::IniFormat);
+        ui->csot_id->setText(settings.value("CSOT/ID", "").toString());
+        ui->csot_name->setText(settings.value("CSOT/Nama", "").toString());
+        ui->csot_contact->setText(settings.value("CSOT/Kontak", "").toString());
+        on_send_csot_clicked();
+        ui->csot_id->clear();
+        ui->csot_name->clear();
+        ui->csot_contact->clear();
 
-    showRunningText(settings.value("RUNNING_TEXT/Text", "").toString(), screen2);
+        showRunningText(settings.value("RUNNING_TEXT/Text", "").toString(), screen2);
 
-    QString filePath = "C:/DataBasePIDS/GAPEKA/" + settings.value("GAPEKA/Folder","").toString() + "/" + settings.value("GAPEKA/NomorKA","").toString() + "," + settings.value("GAPEKA/NamaKA","").toString() + "," + settings.value("GAPEKA/RelasiKA","").toString() + ".csv";
-    init_gapeka_config(filePath);
-    ui->temp_2->setText(ui->curr_temp->text());
+        QString filePath = "C:/DataBasePIDS/GAPEKA/" + settings.value("GAPEKA/Folder","").toString() + "/" + settings.value("GAPEKA/NomorKA","").toString() + "," + settings.value("GAPEKA/NamaKA","").toString() + "," + settings.value("GAPEKA/RelasiKA","").toString() + ".csv";
+        init_gapeka_config(filePath);
+        ui->temp_2->setText(ui->curr_temp->text());
+    }
 
     // Init Page & Video
     index = 0;

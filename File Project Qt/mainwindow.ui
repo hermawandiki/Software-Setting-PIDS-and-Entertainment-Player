@@ -32,7 +32,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page_login">
      <widget class="QLabel" name="background_login">
@@ -240,7 +240,7 @@ image: url(:/img/img/hide.png);
        <string notr="true">color: rgb(237, 107, 35);</string>
       </property>
       <property name="text">
-       <string/>
+       <string>N/A</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -269,7 +269,7 @@ image: url(:/img/img/hide.png);
        <string notr="true">color: rgb(237, 107, 35);</string>
       </property>
       <property name="text">
-       <string/>
+       <string>N/A</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -298,7 +298,7 @@ image: url(:/img/img/hide.png);
        <string notr="true">color: rgb(237, 107, 35);</string>
       </property>
       <property name="text">
-       <string/>
+       <string>N/A</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -327,7 +327,7 @@ image: url(:/img/img/hide.png);
        <string notr="true">color: rgb(237, 107, 35);</string>
       </property>
       <property name="text">
-       <string/>
+       <string>N/A</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>

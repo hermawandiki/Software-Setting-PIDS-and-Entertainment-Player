@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<RCC>
+    <qresource prefix="/img">
+        <file alias="img/VIDEO.png">../../img/VIDEO.png</file>
+        <file alias="img/hide.png">../../img/hide.png</file>
+        <file alias="img/pause.png">../../img/pause.png</file>
+        <file alias="img/play.png">../../img/play.png</file>
+        <file alias="img/show.png">../../img/show.png</file>
+        <file alias="img/CSOT.png">../../img/CSOT.png</file>
+        <file alias="img/logout.png">../../img/logout.png</file>
+        <file alias="img/KAI.png">../../img/KAI.png</file>
+        <file alias="map.qml">../../map.qml</file>
+        <file alias="marker.png">../../marker.png</file>
+        <file alias="img/LOGIN.png">../../img/LOGIN.png</file>
+        <file alias="img/MAPS.png">../../img/MAPS.png</file>
+        <file alias="img/SETTING.png">../../img/SETTING.png</file>
+    </qresource>
+</RCC>

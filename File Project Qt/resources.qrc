@@ -1,24 +1,11 @@
 <RCC>
     <qresource prefix="/img">
-        <file>img/Logo BUMN.png</file>
-        <file>img/Logo KAI.png</file>
-        <file>img/Logo REKA.png</file>
         <file>img/VIDEO.png</file>
-        <file>img/down.png</file>
         <file>img/hide.png</file>
-        <file>img/log in.png</file>
         <file>img/pause.png</file>
-        <file>img/photo.png</file>
         <file>img/play.png</file>
         <file>img/show.png</file>
-        <file>img/up.png</file>
-        <file>img/Logo BUMN Putih.png</file>
-        <file>img/Logo KAI Putih.png</file>
-        <file>img/send text.png</file>
-        <file>img/send csot.png</file>
         <file>img/CSOT.png</file>
-        <file>img/gapeka.png</file>
-        <file>img/send gapeka.png</file>
         <file>img/logout.png</file>
         <file>img/KAI.png</file>
         <file>map.qml</file>
