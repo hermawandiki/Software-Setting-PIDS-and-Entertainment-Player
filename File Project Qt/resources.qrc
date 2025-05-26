@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>img/hide.png</file>
+        <file>img/pause.png</file>
+        <file>img/play.png</file>
+        <file>img/show.png</file>
+        <file>img/CSOT.png</file>
+        <file>img/logout.png</file>
+        <file>img/KAI.png</file>
+        <file>map.qml</file>
+        <file>marker.png</file>
+        <file>img/LOGIN.png</file>
+        <file>img/MAPS.png</file>
+        <file>img/SETTING.png</file>
+        <file>img/VIDEO.png</file>
+    </qresource>
+</RCC>
